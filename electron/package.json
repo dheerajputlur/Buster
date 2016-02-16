@@ -1,0 +1,14 @@
+{
+  "name": "buster-desktop",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Buster Cross-Platform Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "electron-prebuilt": "^0.34.0"
+  }
+}
