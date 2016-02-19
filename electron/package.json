@@ -9,6 +9,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "electron-prebuilt": "^0.34.0"
+    "electron-prebuilt": "^0.36.7"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.2",
+    "font-awesome": "^4.5.0",
+    "jquery": "^2.2.0",
+    "slideout": "^0.1.12"
   }
 }

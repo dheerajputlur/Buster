@@ -1,0 +1,216 @@
+html {
+  height: 100%;
+}
+body {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  background-color: #ffffff;
+  color: #000000;
+  height: 100%;
+}
+main {
+  background-color: #ffffff;
+  min-height: 100%;
+}
+.hidden {
+  display: none !important;
+}
+.no-select {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE/Edge */
+  user-select: none;
+  /* non-prefixed version, currently not supported by any browser */
+}
+a {
+  color: #685d9f;
+}
+a:hover {
+  color: #48416f;
+  text-decoration: none;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  line-height: 1.2;
+  color: inherit;
+}
+h1 {
+  font-size: 36;
+}
+small {
+  font-size: 85%;
+}
+.disabled-text {
+  color: #aaaaaa;
+}
+.center-text {
+  text-align: center;
+  display: block;
+}
+.justify-text {
+  text-align: justify;
+  display: block;
+}
+#menu-button {
+  position: absolute;
+  top: 45px;
+  left: 20px;
+  z-index: 1000;
+  padding: 4px 12px;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  border: none;
+}
+#menu-button:focus, #menu-button:hover {
+  outline: none;
+}
+#menu-button:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #685d9f;
+}
+#menu-button span {
+  padding: 4px;
+}
+#top-header {
+  padding-top: 100px;
+  padding-bottom: 60px;
+  margin-bottom: 30px;
+  font-size: 20px;
+  color: #fff;
+  background-color: #685d9f;
+  background-image: linear-gradient(to bottom, #48416f, #685d9f)
+}
+#top-header p {
+  font-weight: 300;
+  color: #c1bdd8;
+  font-size: 24px;
+}
+#top-header h1 {
+  font-size: 50px;
+}
+@media (min-width: 440px) {
+  #top-header h1 {
+    font-size: 60px;
+  }
+}
+#content {
+  padding-top: 50px;
+}
+#content h1 {
+  padding-bottom: 10px;
+  margin: 44px 0 22px;
+  border-bottom: 1px solid #eeeeee;
+}
+#content p {
+  display: block;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  font-weight: 300;
+  font-size: 19px;
+}
+#menu {
+  padding-top: 20px;
+  background-color: #f2f2f2;
+}
+#menu .headline {
+  padding-top: 30px;
+  padding-right: 15px;
+  margin-bottom: 5px;
+  font-size: 85%;
+  font-weight: normal;
+  letter-spacing: 1px;
+  color: #afafaf;
+  text-transform: uppercase;
+  cursor: default;
+}
+#menu ul {
+  cursor: pointer;
+}
+#menu ul > li {
+  display: block;
+  padding: 5px 10px 5px 30px;
+  border-bottom: 0;
+  border-left: 4px solid transparent;
+}
+#menu ul > li > a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 300;
+  display: block
+}
+#menu ul > li.active, #menu ul > li:not(.headline):hover {
+  border-left-color: #685d9f;
+}
+#menu ul > li.active > a {
+  font-weight: bold;
+}
+#menu ul > li.active > a, #menu ul > li > a:hover, #menu ul > li:hover > a {
+  color: #685d9f;
+}
+.button-purple {
+  background-color: #685d9f;
+  background-image: none;
+  border: 1px solid transparent;
+  border-color: #5d548f;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.6;
+  margin: 10px auto 20px auto;
+  padding: 5px 12px 6px 12px;
+  text-align: center;
+  touch-action: manipulation;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  white-space: nowrap;
+}
+.button-purple:hover {
+  background-color: #453F6B;
+}
+@media (min-width: 768px) {
+  .button-purple {
+    margin-left: 0px;
+  }
+}
+.form-control {
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  color: #555555;
+  display: block;
+  font-size: 14px;
+  height: 39px;
+  line-height: 1.6;
+  margin: 10px 0;
+  padding: 6px 12px;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  width: 100%;
+}
+.back-to-top {
+  background-color: #f2f2f2;
+  border-radius: 4px;
+  bottom: 20px;
+  font-size: 14px;
+  padding: 6px 12px;
+  position: fixed;
+  right: 20px;
+  z-index: 1000;
+}
