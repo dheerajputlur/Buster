@@ -85,8 +85,8 @@
     </div>
   </main>
   <a class="back-to-top" href="#">Back to top</a>
-  
-  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+  <script>window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');</script>
   <script src="node_modules/slideout/dist/slideout.min.js"></script>
   <script>
     var slideout = new Slideout({
@@ -96,14 +96,7 @@
       'tolerance': 70
     });
   </script>
-  <script>
-    try {
-      $ = jQuery = module.exports;
-      window.Tether = {}
-        // If you want module.exports to be empty, uncomment:
-        // module.exports = {};
-    } catch (e) {}
-  </script>
+  <script>window.Tether = {}</script>
   <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
