@@ -1,0 +1,23 @@
+{
+  "name": "buster",
+  "version": "0.0.1",
+  "description": "A node module that detect improper iframe busting code",
+  "main": "buster.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathanchapman/buster.git"
+  },
+  "keywords": [
+    "buster",
+    "iframe",
+    "x-frame-options",
+    "content-security-policy",
+    "clickjacking"
+  ],
+  "author": "Nathan Chapman, Dheeraj Putlur",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nathanchapman/buster/issues"
+  },
+  "homepage": "https://github.com/nathanchapman/buster#readme"
+}
