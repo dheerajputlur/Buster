@@ -1,5 +1,5 @@
 {
-  "name": "buster",
+  "name": "frame-buster",
   "version": "0.0.1",
   "description": "A node module that detect improper iframe busting code",
   "main": "buster.js",
