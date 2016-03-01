@@ -1,2 +1,2 @@
 # Buster
-A Chrome extension that detects improper iframe busting code
+An application and Chrome extension that detect improper iframe busting code
