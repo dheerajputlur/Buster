@@ -2,12 +2,12 @@ html {
   height: 100%;
 }
 body {
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
   background-color: #ffffff;
   color: #000000;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
   height: 100%;
+  line-height: 1.6;
 }
 main {
   background-color: #ffffff;
@@ -31,17 +31,17 @@ main {
   /* non-prefixed version, currently not supported by any browser */
 }
 a {
-  color: #685d9f;
+  color: #685d9e;
 }
 a:hover {
-  color: #48416f;
+  color: #48416e;
   text-decoration: none;
 }
 h1, h2, h3, h4, h5, h6 {
+  color: inherit;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 100;
   line-height: 1.2;
-  color: inherit;
 }
 h1 {
   font-size: 36;
@@ -49,52 +49,58 @@ h1 {
 small {
   font-size: 85%;
 }
+.green {
+  color: rgb(4, 182, 43);
+}
+.red {
+  color: rgb(230, 60, 44);
+}
 .disabled-text {
   color: #aaaaaa;
 }
 .center-text {
-  text-align: center;
   display: block;
+  text-align: center;
 }
 .justify-text {
-  text-align: justify;
   display: block;
+  text-align: justify;
 }
 #menu-button {
-  position: absolute;
-  top: 45px;
-  left: 20px;
-  z-index: 1000;
-  padding: 4px 12px;
-  color: #ffffff;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   border: none;
+  color: #ffffff;
+  left: 20px;
+  padding: 4px 12px;
+  position: absolute;
+  top: 45px;
+  z-index: 1000;
 }
 #menu-button:focus, #menu-button:hover {
   outline: none;
 }
 #menu-button:hover {
+  background-color: #685d9e;
   color: #ffffff;
   text-decoration: none;
-  background-color: #685d9f;
 }
 #menu-button span {
   padding: 4px;
 }
 #top-header {
-  padding-top: 100px;
-  padding-bottom: 60px;
-  margin-bottom: 30px;
-  font-size: 20px;
+  background-color: #685d9e;
+  background-image: linear-gradient(to bottom, #48416e, #685d9e);
   color: #fff;
-  background-color: #685d9f;
-  background-image: linear-gradient(to bottom, #48416f, #685d9f)
+  font-size: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 60px;
+  padding-top: 100px;
 }
 #top-header p {
-  font-weight: 300;
-  color: #c1bdd8;
+  color: #c1bdd9;
   font-size: 24px;
+  font-weight: 300;
 }
 #top-header h1 {
   font-size: 50px;
@@ -108,64 +114,65 @@ small {
   padding-top: 50px;
 }
 #content h1 {
-  padding-bottom: 10px;
-  margin: 44px 0 22px;
   border-bottom: 1px solid #eeeeee;
+  margin: 44px 0 22px;
+  padding-bottom: 10px;
 }
 #content p {
-  display: block;
-  -webkit-margin-before: 1em;
   -webkit-margin-after: 1em;
-  -webkit-margin-start: 0px;
+  -webkit-margin-before: 1em;
   -webkit-margin-end: 0px;
-  font-weight: 300;
+  -webkit-margin-start: 0px;
+  display: block;
   font-size: 19px;
+  font-weight: 300;
 }
 #menu {
-  padding-top: 20px;
   background-color: #f2f2f2;
+  padding-top: 20px;
 }
 #menu .headline {
-  padding-top: 30px;
-  padding-right: 15px;
-  margin-bottom: 5px;
+  color: #afafaf;
+  cursor: default;
   font-size: 85%;
   font-weight: normal;
   letter-spacing: 1px;
-  color: #afafaf;
+  margin-bottom: 5px;
+  padding-right: 15px;
+  padding-top: 30px;
   text-transform: uppercase;
-  cursor: default;
 }
 #menu ul {
   cursor: pointer;
 }
 #menu ul > li {
-  display: block;
-  padding: 5px 10px 5px 30px;
   border-bottom: 0;
   border-left: 4px solid transparent;
+  display: block;
+  padding: 5px 10px 5px 30px;
 }
 #menu ul > li > a {
-  text-decoration: none;
   color: #000;
+  display: block;
   font-weight: 300;
-  display: block
+  text-decoration: none;
 }
 #menu ul > li.active, #menu ul > li:not(.headline):hover {
-  border-left-color: #685d9f;
+  border-left-color: #685d9e;
 }
 #menu ul > li.active > a {
   font-weight: bold;
 }
 #menu ul > li.active > a, #menu ul > li > a:hover, #menu ul > li:hover > a {
-  color: #685d9f;
+  color: #685d9e;
 }
 .button-purple {
-  background-color: #685d9f;
+  -ms-touch-action: manipulation;
+  background-color: #685d9e;
   background-image: none;
-  border: 1px solid transparent;
-  border-color: #5d548f;
+  border-color: #5d548e;
   border-radius: 4px;
+  border: 1px solid transparent;
   color: #ffffff;
   cursor: pointer;
   display: block;
@@ -177,11 +184,10 @@ small {
   text-align: center;
   touch-action: manipulation;
   vertical-align: middle;
-  -ms-touch-action: manipulation;
   white-space: nowrap;
 }
 .button-purple:hover {
-  background-color: #453F6B;
+  background-color: #453F6C;
 }
 @media (min-width: 768px) {
   .button-purple {
@@ -191,8 +197,8 @@ small {
 .form-control {
   background-color: #ffffff;
   background-image: none;
-  border: 1px solid #cccccc;
   border-radius: 4px;
+  border: 1px solid #cccccc;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   color: #555555;
   display: block;
