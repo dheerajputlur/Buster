@@ -3,7 +3,7 @@ function setNavigation() {
   path = path.replace(/\/$/, "");
   path = decodeURIComponent(path);
 
-  $("nav a").each(function() {
+  $('nav a').each(function() {
     var href = $(this).attr('href');
     if (path.substring(path.length - href.length, path.length) === href) {
       $(this).closest('li').addClass('active');
@@ -11,7 +11,7 @@ function setNavigation() {
   });
 }
 $(function() {
-  $(".back-to-top").hide();
+  $('.back-to-top').hide();
   $(window).on('scroll', function() {
     if ($(window).scrollTop() > $(window).height() / 5) {
       $(".back-to-top").fadeIn();
@@ -31,4 +31,21 @@ $(function() {
   $('#menu-button').on('click', function() {
     slideout.toggle();
   });
+});
+$('#url').keyup(function (e) {
+    if (e.keyCode == 13) {
+      runAttacks();
+    }
+});
+$('#attack').click(function() {
+  runAttacks();
+});
+
+function runAttacks() {
+  window.BUSTER.attack($('#url').val());
+  $('#test2').attr('src', $('#url').val());
+}
+
+$('#test2').on('load', function() {
+  console.log($('#test2').attr('src'));
 });

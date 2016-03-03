@@ -59,13 +59,26 @@
     <div id="content">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-lg-10 col-lg-offset-1">
-            <h1 id="intro">Intro</h1>
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-8 col-md-10">
+                    <input id="url" class="form-control" type="text" placeholder="URL of website" />
+                  </div>
+                  <div class="col-xs-12 col-sm-4 col-md-2">
+                    <button id="attack" class="button-purple">Demonstrate Attacks</button>
+                  </div>
+                </div>
 
-            <p>Hey there! You’re looking at the docs for an Official Bootstrap Theme—thanks for your purchase! This theme has been lovingly crafted by Bootstrap’s founders and friends to help you build awesome projects on the web. Let’s dive in.</p>
+                <h1>Test 1: <small>Headers</small></h1>
+                <p>This test checks the HTTP headers from X-Frame-Options and Content-Security-Policy.</p>
 
-            <p>Each theme is designed as it’s own toolkit—a series of well designed, intuitive, and cohesive components—built on top of Bootstrap. If you’ve used Bootstrap itself, you’ll find this all super familiar, but with new aesthetics, new components,
-              beautiful and extensive examples, and easy-to-use build tools and documentation.</p>
+                <h1>Test 2: <small>iframe</small></h1>
+                <p>This test tries to iframe the given website.</p>
+                <iframe id="test2"></iframe>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -73,8 +86,12 @@
   </main>
   <a class="back-to-top" href="#">Back to top</a>
 
-  <script>window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');</script>
-  <script>window.BUSTER = require('./buster.js'); window.BUSTER.headerTest('http://stackoverflow.com');</script>
+  <script>
+    window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');
+  </script>
+  <script>
+    window.BUSTER = require('../buster.js');
+  </script>
   <script src="node_modules/slideout/dist/slideout.min.js"></script>
   <script>
     var slideout = new Slideout({
@@ -84,7 +101,9 @@
       'tolerance': 70
     });
   </script>
-  <script>window.Tether = {}</script>
+  <script>
+    window.Tether = {}
+  </script>
   <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
