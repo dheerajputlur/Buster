@@ -1,5 +1,9 @@
 var Buster = function() {};
 
+Buster.prototype.attack = function(URL) {
+  this.headerTest(URL);
+};
+
 Buster.prototype.headers = function(URL) {
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
@@ -7,7 +11,10 @@ Buster.prototype.headers = function(URL) {
 
     xhr.onload = function() {
       if (xhr.status == 200) {
-        resolve([xhr.getResponseHeader('X-Frame-Options'), xhr.getResponseHeader('Content-Security-Policy')]);
+        resolve([ xhr.getResponseHeader('X-Frame-Options'),
+                  xhr.getResponseHeader('Content-Security-Policy'),
+                  xhr.getResponseHeader('X-Content-Security-Policy')
+                ]);
       } else {
         reject(Error(xhr.statusText));
       }
@@ -15,7 +22,7 @@ Buster.prototype.headers = function(URL) {
 
     // Handle network errors
     xhr.onerror = function() {
-      reject(Error("Network Error"));
+      reject(Error('Network Error'));
     };
 
     xhr.send(null);
@@ -26,19 +33,17 @@ Buster.prototype.headers = function(URL) {
 Buster.prototype.headerTest = function(URL) {
   this.headers(URL).then(function(response) {
     // check if URL passes X-Frame-Options Test
+    var pass = false;
     switch(response[0]) {
       case 'DENY':
       case 'SAMEORIGIN':
-        console.log("Passed", response[0]);
-        break;
-      default:
-        console.log("Failed", response[0]);
+        pass = true;
         break;
     }
+    console.log(pass || (Boolean(response[1]) && Boolean(response[2])));
   }, function(error) {
-    console.error("Test Error", error);
+    console.error('Test Error', error);
   });
-  // ADD check if URL passes Content-Security-Policy Test
 };
 
 
