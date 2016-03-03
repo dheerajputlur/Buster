@@ -15,6 +15,7 @@
     "bootstrap": "^4.0.0-alpha.2",
     "font-awesome": "^4.5.0",
     "jquery": "^2.2.0",
+    "open": "0.0.5",
     "slideout": "^0.1.12"
   }
 }

@@ -1,5 +1,6 @@
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
+var open = require("open"); // Module to open external links in main broweser
 
 // Report crashes to our server.
 require('crash-reporter').start({productName: 'Buster', companyName: 'UTCS', submitURL: 'http://127.0.0.1'});
@@ -32,6 +33,11 @@ function createWindow () {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  mainWindow.webContents.on('new-window', function(event, url) {
+    event.preventDefault();
+    open(url);
+  });
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
