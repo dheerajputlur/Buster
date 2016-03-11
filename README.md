@@ -3,4 +3,15 @@
 [![GitHub release](https://img.shields.io/github/release/nathanchapman/buster.svg)](https://github.com/nathanchapman/buster/releases)
 [![GitHub license](https://img.shields.io/github/license/nathanchapman/buster.svg)](https://github.com/nathanchapman/buster/blob/master/LICENSE)
 
-An application and Chrome extension that detect improper iframe busting code
+An npm package that detects improper iframe busting code. Also included are an electron application and a Chrome extension.
+
+##Example
+```javascript
+window.BUSTER = require('buster.js');
+
+var url = ...
+var iframe = document.getElementById('frame');
+
+var passedHeaderTest = window.BUSTER.headersTest(URL);
+var passediFrameTest = window.BUSTER.iframeTest(URL, iframe);
+```
