@@ -1,10 +1,6 @@
 var Buster = function() {};
 
-Buster.prototype.attack = function(URL) {
-  this.headerTest(URL);
-};
-
-Buster.prototype.headers = function(URL) {
+Buster.prototype.getHeaders = function(URL) {
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', URL, true);
@@ -30,8 +26,8 @@ Buster.prototype.headers = function(URL) {
 };
 
 
-Buster.prototype.headerTest = function(URL) {
-  this.headers(URL).then(function(response) {
+Buster.prototype.headersTest = function(URL) {
+  this.getHeaders(URL).then(function(response) {
     // check if URL passes X-Frame-Options Test
     var pass = false;
     switch(response[0]) {
@@ -40,11 +36,17 @@ Buster.prototype.headerTest = function(URL) {
         pass = true;
         break;
     }
-    console.log(pass || (Boolean(response[1]) && Boolean(response[2])));
+    return pass || (Boolean(response[1]) && Boolean(response[2]));
   }, function(error) {
     console.error('Test Error', error);
   });
 };
 
+Buster.prototype.iframeTest = function(URL, element) {
+  if (element.contentWindow.location.href.indexOf(URL) > -1) {
+    return false;
+  }
+  return true;
+};
 
 module.exports = new Buster();

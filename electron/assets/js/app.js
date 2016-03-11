@@ -41,11 +41,24 @@ $('#attack').click(function() {
   runAttacks();
 });
 
+function fail(div) {
+  $(div).after("<p>Fail</p>");
+}
+
+function pass(div) {
+  $(div).after("<p>Pass</p>");
+}
+
 function runAttacks() {
-  window.BUSTER.attack($('#url').val());
+  window.BUSTER.headersTest($('#url').val());
   $('#test2').attr('src', $('#url').val());
 }
 
 $('#test2').on('load', function() {
-  console.log($('#test2').attr('src'));
+  if (window.BUSTER.iframeTest($('#url').val(), this)) {
+    pass(this);
+  }
+  else {
+    fail(this);
+  }
 });
