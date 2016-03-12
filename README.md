@@ -6,7 +6,19 @@
 
 An npm package that detects improper iframe busting code. Also included are an electron application and a Chrome extension.
 
-##Example
+##Examples
+In a node app
+```javascript
+var buster = require('buster.js');
+
+var url = ...
+var iframe = document.getElementById('frame');
+
+var passedHeaderTest = buster.headersTest(URL);
+var passediFrameTest = buster.iframeTest(URL, iframe);
+```
+
+In an electron app
 ```javascript
 window.BUSTER = require('buster.js');
 
