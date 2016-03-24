@@ -1,14 +1,14 @@
 {
-  "name": "frame-buster",
-  "version": "0.0.2",
+  "name": "busted",
+  "version": "0.0.3",
   "description": "A node module that detect improper iframe busting code",
-  "main": "buster.js",
+  "main": "busted.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nathanchapman/buster.git"
+    "url": "git+https://github.com/nathanchapman/busted.git"
   },
   "keywords": [
-    "buster",
+    "busted",
     "iframe",
     "x-frame-options",
     "content-security-policy",
@@ -17,7 +17,7 @@
   "author": "Nathan Chapman, Dheeraj Putlur",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nathanchapman/buster/issues"
+    "url": "https://github.com/nathanchapman/busted/issues"
   },
-  "homepage": "https://github.com/nathanchapman/buster#readme"
+  "homepage": "https://github.com/nathanchapman/busted#readme"
 }

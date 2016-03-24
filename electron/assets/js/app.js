@@ -42,23 +42,38 @@ $('#attack').click(function() {
 });
 
 function fail(div) {
-  $(div).after("<p>Fail</p>");
+  $(div.find('.status')).html('<p class=\'red\'>Fail</p>');
 }
 
 function pass(div) {
-  $(div).after("<p>Pass</p>");
+  $(div.find('.status')).html('<p class=\'green\'>Pass</p>');
 }
 
 function runAttacks() {
-  window.BUSTER.headersTest($('#url').val());
-  $('#test2').attr('src', $('#url').val());
+  $('.status').html('');
+  $('#test2 iframe').attr('src', '');
+  window.BUSTER.headersTest($('#url').val(), runTest);
+  $('#test2 iframe').attr('src', $('#url').val());
+  $('#test3 iframe').attr('src', 'iframe.html?src=' + $('#url').val());
 }
 
-$('#test2').on('load', function() {
-  if (window.BUSTER.iframeTest($('#url').val(), this)) {
-    pass(this);
+function runTest(passed, test) {
+  test = test || 'test1';
+  if (test.indexOf('#') !== 0) {
+    test = "#" + test;
+  }
+  if (passed) {
+    pass($(test));
   }
   else {
-    fail(this);
+    fail($(test));
   }
+}
+
+$('#test2 iframe').on('load', function() {
+  runTest(window.BUSTER.iframeTest($('#url').val(), this), 'test2');
+});
+
+$('#test3 iframe').on('load', function() {
+  runTest(window.BUSTER.iframeTest($('#url').val(), this, 'iframe.html?src='), 'test3');
 });

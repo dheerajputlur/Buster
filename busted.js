@@ -1,6 +1,6 @@
-var Buster = function() {};
+var Busted = function() {};
 
-Buster.prototype.getHeaders = function(URL) {
+Busted.prototype.getHeaders = function(URL) {
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', URL, true);
@@ -26,7 +26,8 @@ Buster.prototype.getHeaders = function(URL) {
 };
 
 
-Buster.prototype.headersTest = function(URL) {
+Busted.prototype.headersTest = function(URL, callback) {
+  console.log('headersTest');
   this.getHeaders(URL).then(function(response) {
     // check if URL passes X-Frame-Options Test
     var pass = false;
@@ -36,17 +37,19 @@ Buster.prototype.headersTest = function(URL) {
         pass = true;
         break;
     }
-    return pass || (Boolean(response[1]) && Boolean(response[2]));
+    callback(pass || (Boolean(response[1]) && Boolean(response[2])));
   }, function(error) {
     console.error('Test Error', error);
   });
 };
 
-Buster.prototype.iframeTest = function(URL, element) {
-  if (element.contentWindow.location.href.indexOf(URL) > -1) {
+Busted.prototype.iframeTest = function(URL, frameElement, excludes) {
+  console.log('iframeTest');
+  if (frameElement.contentWindow.location.href.indexOf(excludes) < 0 &&
+      frameElement.contentWindow.location.href.indexOf(URL) > -1) {
     return false;
   }
   return true;
 };
 
-module.exports = new Buster();
+module.exports = new Busted();
