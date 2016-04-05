@@ -8,6 +8,7 @@
 [![GitHub license](https://img.shields.io/github/license/nathanchapman/busted.svg)](https://github.com/nathanchapman/busted/blob/master/LICENSE)
 
 An npm package that detects improper iframe busting code. Also included are an electron application and a Chrome extension.
+This package is currently under **_heavy_** development and is **not reliable**.
 
 ##Examples
 In a node app

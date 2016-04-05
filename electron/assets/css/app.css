@@ -55,6 +55,9 @@ small {
 .red {
   color: rgb(230, 60, 44);
 }
+.yellow {
+  color: rgb(251, 215, 59);
+}
 .disabled-text {
   color: #aaaaaa;
 }

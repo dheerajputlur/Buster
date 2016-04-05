@@ -51,15 +51,25 @@ function pass(div) {
   $(div.find('.status')).html('<p class=\'green\'>Pass</p>');
 }
 
+function error(div) {
+  $(div.find('.status')).html('<p class=\'yellow\'>URL Not Found</p>');
+}
+
 function runTest(passed, test) {
   test = test || 'test1';
   if (test.indexOf('#') !== 0) {
     test = "#" + test;
   }
-  if (passed) {
-    pass($(test));
-  } else {
-    fail($(test));
+  switch (passed) {
+    case true:
+      pass($(test));
+      break;
+    case false:
+      fail($(test));
+      break;
+    case -1:
+      error($(test));
+      break;
   }
 }
 
@@ -91,6 +101,6 @@ $('#test3 iframe').load(function() {
 function runAttacks() {
   $('.status').html('');
   window.BUSTED.headersTest($('#url').val(), runTest);
-  $('#test2 iframe').attr('src', $('#url').val());
-  $('#test3 iframe').attr('src', 'iframe.html?src=' + $('#url').val());
+  $('#test2 iframe').attr('src', window.BUSTED.standardizeURL($('#url').val()));
+  $('#test3 iframe').attr('src', 'iframe.html?src=' + window.BUSTED.standardizeURL($('#url').val()));
 }
