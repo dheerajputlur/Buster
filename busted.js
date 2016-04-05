@@ -25,9 +25,12 @@ Busted.prototype.getHeaders = function(URL) {
   });
 };
 
+Busted.prototype.removeProtocolFromURL = function(URL) {
+  return String(URL).replace(/^(https?:\/\/)?(www\.)?/,'');
+};
+
 
 Busted.prototype.headersTest = function(URL, callback) {
-  console.log('headersTest');
   this.getHeaders(URL).then(function(response) {
     // check if URL passes X-Frame-Options Test
     var pass = false;
@@ -43,10 +46,14 @@ Busted.prototype.headersTest = function(URL, callback) {
   });
 };
 
-Busted.prototype.iframeTest = function(URL, frameElement, excludes) {
-  console.log('iframeTest');
-  if (frameElement.contentWindow.location.href.indexOf(excludes) < 0 &&
-      frameElement.contentWindow.location.href.indexOf(URL) > -1) {
+Busted.prototype.iframeTest = function(URL, frameElement, excludeString) {
+  var baseURL = this.removeProtocolFromURL(URL);
+  var frameURL = this.removeProtocolFromURL(frameElement.contentWindow.location.href);
+
+  if (excludeString && frameURL.indexOf(excludeString) > -1) {
+    return true;
+  }
+  else if (frameURL.indexOf(baseURL) > -1) {
     return false;
   }
   return true;

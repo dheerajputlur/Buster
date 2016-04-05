@@ -32,11 +32,13 @@ $(function() {
     slideout.toggle();
   });
 });
-$('#url').keyup(function (e) {
-    if (e.keyCode == 13) {
-      runAttacks();
-    }
+
+$('#url').keyup(function(e) {
+  if (e.keyCode == 13) {
+    runAttacks();
+  }
 });
+
 $('#attack').click(function() {
   runAttacks();
 });
@@ -49,14 +51,6 @@ function pass(div) {
   $(div.find('.status')).html('<p class=\'green\'>Pass</p>');
 }
 
-function runAttacks() {
-  $('.status').html('');
-  $('#test2 iframe').attr('src', '');
-  window.BUSTER.headersTest($('#url').val(), runTest);
-  $('#test2 iframe').attr('src', $('#url').val());
-  $('#test3 iframe').attr('src', 'iframe.html?src=' + $('#url').val());
-}
-
 function runTest(passed, test) {
   test = test || 'test1';
   if (test.indexOf('#') !== 0) {
@@ -64,16 +58,39 @@ function runTest(passed, test) {
   }
   if (passed) {
     pass($(test));
-  }
-  else {
+  } else {
     fail($(test));
   }
 }
 
-$('#test2 iframe').on('load', function() {
-  runTest(window.BUSTER.iframeTest($('#url').val(), this), 'test2');
+$('#test2 iframe').load(function(e) {
+  // console.log(e.target.contentDocument.URL);
+  // if (e.target.contentDocument.URL.indexOf($('#url').val()) < 0) {
+  //   $('#test2 iframe').attr('src', 'about:blank');
+  // }
+  runTest(window.BUSTED.iframeTest($('#url').val(), this), 'test2');
 });
 
-$('#test3 iframe').on('load', function() {
-  runTest(window.BUSTER.iframeTest($('#url').val(), this, 'iframe.html?src='), 'test3');
+$('#test2 iframe').error(function(e) {
+  console.log(e);
 });
+
+$('#test3 iframe').load(function() {
+    var childFrame = $(this).contents().find('#iframe');
+    var parentFramePassed = window.BUSTED.iframeTest($('#url').val(), this, 'iframe.html?src=');
+
+    var childFramePassed = (function() {
+      return window.BUSTED.iframeTest($('#url').val(), childFrame[0]);
+    });
+
+    childFrame.load(function() {
+      runTest(childFramePassed() && parentFramePassed, 'test3');
+    });
+});
+
+function runAttacks() {
+  $('.status').html('');
+  window.BUSTED.headersTest($('#url').val(), runTest);
+  $('#test2 iframe').attr('src', $('#url').val());
+  $('#test3 iframe').attr('src', 'iframe.html?src=' + $('#url').val());
+}
