@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/nathanchapman/busted/issues"
   },
-  "homepage": "https://github.com/nathanchapman/busted#readme"
+  "homepage": "https://github.com/nathanchapman/busted#readme",
+  "dependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
 }

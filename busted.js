@@ -1,5 +1,7 @@
 var Busted = function() {};
 
+var XMLHttpRequest = XMLHttpRequest || require("xmlhttprequest").XMLHttpRequest;
+
 Busted.prototype.getHeaders = function(URL) {
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
