@@ -10,23 +10,28 @@
 An npm package that detects improper iframe busting code. Also included are an electron application and a Chrome extension.
 This package is currently under **_heavy_** development and is **not reliable**.
 
-##Examples
-In a node app
-```javascript
-var busted = require('busted.js');
+##Installation
+```
+$ npm install busted
+```
 
-var url = ...
+##Usage
+In a Node.js application
+```javascript
+var busted = require('busted');
+
+var url = "http://www.example.com";
 var iframe = document.getElementById('frame');
 
 var passedHeaderTest = busted.headersTest(URL);
 var passediFrameTest = busted.iframeTest(URL, iframe);
 ```
 
-In an electron app
+In an Electron application
 ```javascript
 window.BUSTED = require('busted.js');
 
-var url = ...
+var url = "http://www.example.com";
 var iframe = document.getElementById('frame');
 
 var passedHeaderTest = window.BUSTED.headersTest(URL);
