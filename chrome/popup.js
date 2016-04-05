@@ -94,7 +94,9 @@ function renderStatus(statusText) {
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("submit-me").addEventListener("click", function() {
-    document.getElementById("url").value = getCurrentTabUrl(function(url) {return url});
+    document.getElementById("url").value = getCurrentTabUrl(function(url) {
+      return url;
+    });
   });
   getCurrentTabUrl(function(url) {
     // Put the image URL in Google search.
