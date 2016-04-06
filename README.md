@@ -7,16 +7,20 @@
 [![bitHound Dependencies](https://www.bithound.io/github/nathanchapman/busted/badges/dependencies.svg)](https://www.bithound.io/github/nathanchapman/busted/master/dependencies/npm)
 [![GitHub license](https://img.shields.io/github/license/nathanchapman/busted.svg)](https://github.com/nathanchapman/busted/blob/master/LICENSE)
 
-An npm package that detects improper iframe busting code. Also included are an electron application and a Chrome extension.
+<img align="right" width="300" src="http://www.dafont.com/forum/attach/orig/5/5/554705.png">
+
+An npm package that detects improper iframe busting code. Also included are an Electron application and a Chrome extension.
+
 This package is currently under **_heavy_** development and is **not reliable**.
 
-##Installation
+
+## Installation
 ```
 $ npm install busted
 ```
 
-##Usage
-In a Node.js application (only headers test is functional)
+## Usage
+In a Node.js application (only headers test is functional):
 ```javascript
 var busted = require('busted');
 var URL = "http://www.example.com";
@@ -25,7 +29,7 @@ busted.headersTest(URL, function(passed) {
 });
 ```
 
-In an Electron application (has DOM access so iframes can be tested)
+In an Electron application (has DOM access so iframes can be tested):
 ```javascript
 window.BUSTED = require('busted.js');
 
