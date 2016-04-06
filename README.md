@@ -15,7 +15,7 @@ This package is currently under **_heavy_** development and is **not reliable**.
 
 
 ## Installation
-```
+```sh
 $ npm install busted
 ```
 
