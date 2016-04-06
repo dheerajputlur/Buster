@@ -16,24 +16,29 @@ $ npm install busted
 ```
 
 ##Usage
-In a Node.js application
+In a Node.js application (only headers test is functional)
 ```javascript
 var busted = require('busted');
-
-var url = "http://www.example.com";
-var iframe = document.getElementById('frame');
-
-var passedHeaderTest = busted.headersTest(URL);
-var passediFrameTest = busted.iframeTest(URL, iframe);
+var URL = "http://www.example.com";
+busted.headersTest(URL, function(passed) {
+  console.log(passed);
+});
 ```
 
-In an Electron application
+In an Electron application (has DOM access so iframes can be tested)
 ```javascript
 window.BUSTED = require('busted.js');
 
-var url = "http://www.example.com";
+var URL = "http://www.example.com";
 var iframe = document.getElementById('frame');
+iframe.src = URL;
 
-var passedHeaderTest = window.BUSTED.headersTest(URL);
-var passediFrameTest = window.BUSTED.iframeTest(URL, iframe);
+window.BUSTED.headersTest(URL, function(passed) { 
+  console.log(URL + ": " + (passed ? "passed" : "failed") + " the headers test.");
+});
+
+iframe.onload = function() {
+  var passed = window.BUSTED.iframeTest(URL, iframe);
+  console.log(URL + ": " + (passed ? "passed" : "failed") + " the iframe test.");
+}
 ```
