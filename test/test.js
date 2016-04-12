@@ -101,7 +101,7 @@ describe('iframeTest', function() {
 });
 
 describe('headersTest', function() {
-  this.timeout(5000);
+  this.timeout(15000);
   var testHeaders = function(website, expectation) {
     describe('checks if ' + website + ' has X-Frame-Options or Content-Security-Policy correctly set', function() {
       var pass;
@@ -128,6 +128,5 @@ describe('headersTest', function() {
   testHeaders('twitter.com', true);
   testHeaders('github.com', false);
   testHeaders('ebay.com', false);
-
   testHeaders('facebook.com/something-random.html', Error('Not Found'));
 });
