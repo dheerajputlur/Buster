@@ -8,7 +8,6 @@ node_js:
   - "4.0"
   - "0.12"
   - "0.11"
-  - "0.10"
   - "iojs"
 script: "npm run-script test-travis"
 after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
