@@ -108,4 +108,6 @@ describe('headersTest', function() {
   testHeaders('twitter.com', true);
   testHeaders('github.com', false);
   testHeaders('ebay.com', false);
+
+  testHeaders('facebook.com/something-random.html', -1);
 });
