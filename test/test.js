@@ -7,23 +7,27 @@ var chai = require('chai'),
 describe('removeProtocolFromURL', function() {
   describe('removes protocol from a given URL', function() {
     it('should remove http:// from the URL', function(done) {
-      var URL = "http://facebook.com";
-      expect(busted.removeProtocolFromURL(URL)).to.equal('facebook.com');
+      expect(
+        busted.removeProtocolFromURL('http://facebook.com')
+      ).to.equal('facebook.com');
       done();
     });
     it('should remove https:// from the URL', function(done) {
-      var URL = "https://facebook.com";
-      expect(busted.removeProtocolFromURL(URL)).to.equal('facebook.com');
+      expect(
+        busted.removeProtocolFromURL('https://facebook.com')
+      ).to.equal('facebook.com');
       done();
     });
     it('should remove www. from the URL', function(done) {
-      var URL = "www.facebook.com";
-      expect(busted.removeProtocolFromURL(URL)).to.equal('facebook.com');
+      expect(
+        busted.removeProtocolFromURL('www.facebook.com')
+      ).to.equal('facebook.com');
       done();
     });
     it('should remove http(s):// and www. from the URL', function(done) {
-      var URL = "http://www.facebook.com";
-      expect(busted.removeProtocolFromURL(URL)).to.equal('facebook.com');
+      expect(
+        busted.removeProtocolFromURL('http://www.facebook.com')
+      ).to.equal('facebook.com');
       done();
     });
   });
@@ -32,18 +36,21 @@ describe('removeProtocolFromURL', function() {
 describe('standardizeURL', function() {
   describe('standardizes URL with http protocol if missing', function() {
     it('should do nothing if http:// is present', function(done) {
-      var URL = "http://www.facebook.com";
-      expect(busted.standardizeURL(URL)).to.equal('http://www.facebook.com');
+      expect(
+        busted.standardizeURL('http://www.facebook.com')
+      ).to.equal('http://www.facebook.com');
       done();
     });
     it('should do nothing if https:// is present', function(done) {
-      var URL = "https://www.facebook.com";
-      expect(busted.standardizeURL(URL)).to.equal('https://www.facebook.com');
+      expect(
+        busted.standardizeURL('https://www.facebook.com')
+      ).to.equal('https://www.facebook.com');
       done();
     });
     it('should add http:// if protocol is missing', function(done) {
-      var URL = "facebook.com";
-      expect(busted.standardizeURL(URL)).to.equal('http://facebook.com');
+      expect(
+        busted.standardizeURL('facebook.com')
+      ).to.equal('http://facebook.com');
       done();
     });
   });
@@ -54,24 +61,51 @@ describe('iframeTest', function() {
     var iframe = {
       contentWindow: {
         location: {
-          href: "http://facebook.com"
+          href: 'http://facebook.com'
         }
       }
     };
     it('should return false if the URL was found', function(done) {
-      var URL = "http://facebook.com";
-      expect(busted.iframeTest(URL, iframe)).to.equal(false);
+      expect(
+        busted.iframeTest('http://facebook.com', iframe)
+      ).to.equal(false);
       done();
     });
     it('should return false if similar host URL is found', function(done) {
-      var URL = "https://www.facebook.com";
-      expect(busted.iframeTest(URL, iframe)).to.equal(false);
+      expect(
+        busted.iframeTest('https://www.facebook.com', iframe)
+      ).to.equal(false);
       done();
     });
     it('should return true if similar host URL is not found', function(done) {
-      var URL = "https://www.google.com";
-      expect(busted.iframeTest(URL, iframe)).to.equal(true);
+      expect(
+        busted.iframeTest('https://www.google.com', iframe)
+      ).to.equal(true);
       done();
     });
   });
+});
+
+describe('headersTest', function() {
+  var testHeaders = function(website, expectation) {
+    describe('checks if ' + website + ' has X-Frame-Options or Content-Security-Policy correctly set', function() {
+      var pass;
+      before(function(done) {
+        var URL = 'http://' + website;
+        var cb = function(passed) {
+          pass = passed;
+          done();
+        };
+        busted.headersTest(URL, cb);
+      });
+      it('should ' + (expectation ? 'pass' : 'fail'), function() {
+        expect(pass).to.equal(expectation);
+      });
+    });
+  };
+  testHeaders('google.com', true);
+  testHeaders('facebook.com', true);
+  testHeaders('twitter.com', true);
+  testHeaders('github.com', false);
+  testHeaders('ebay.com', false);
 });
