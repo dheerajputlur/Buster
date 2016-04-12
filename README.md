@@ -37,12 +37,12 @@ var URL = "http://www.example.com";
 var iframe = document.getElementById('frame');
 iframe.src = URL;
 
-window.BUSTED.headersTest(URL, function(passed) { 
-  console.log(URL + ": " + (passed ? "passed" : "failed") + " the headers test.");
+window.BUSTED.headersTest(URL, function(passed) {
+  console.log(passed);
 });
 
 iframe.onload = function() {
   var passed = window.BUSTED.iframeTest(URL, iframe);
-  console.log(URL + ": " + (passed ? "passed" : "failed") + " the iframe test.");
+  console.log(passed);
 }
 ```
