@@ -49,7 +49,7 @@ Busted.prototype.headersTest = function(URL, callback) {
       callback(pass || (Boolean(response[1]) && Boolean(response[2])));
     },
     function(error) {
-      callback(-1);
+      callback(error);
     });
 };
 

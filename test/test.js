@@ -101,6 +101,7 @@ describe('iframeTest', function() {
 });
 
 describe('headersTest', function() {
+  this.timeout(5000);
   var testHeaders = function(website, expectation) {
     describe('checks if ' + website + ' has X-Frame-Options or Content-Security-Policy correctly set', function() {
       var pass;
@@ -113,7 +114,12 @@ describe('headersTest', function() {
         busted.headersTest(URL, cb);
       });
       it('should ' + (expectation ? 'pass' : 'fail'), function() {
-        expect(pass).to.equal(expectation);
+        if (typeof pass === 'object') {
+          expect(pass).to.deep.equal(expectation);
+        }
+        else {
+          expect(pass).to.equal(expectation);
+        }
       });
     });
   };
@@ -123,5 +129,5 @@ describe('headersTest', function() {
   testHeaders('github.com', false);
   testHeaders('ebay.com', false);
 
-  testHeaders('facebook.com/something-random.html', -1);
+  testHeaders('facebook.com/something-random.html', Error('Not Found'));
 });
