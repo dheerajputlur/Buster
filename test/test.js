@@ -83,6 +83,20 @@ describe('iframeTest', function() {
       ).to.equal(true);
       done();
     });
+    it('should return true if excludeString is present', function(done) {
+      iframe.contentWindow.location.href = '/busted/electron/iframe.html?src=http://www.facebook.com';
+      expect(
+        busted.iframeTest('https://www.facebook.com', iframe, 'iframe.html?src=')
+      ).to.equal(true);
+      done();
+    });
+    it('should return false if excludeString is not found and URL is found', function(done) {
+      iframe.contentWindow.location.href = '/busted/electron/iframe.html?src=http://www.facebook.com';
+      expect(
+        busted.iframeTest('https://www.facebook.com', iframe, 'iframe.php?src=')
+      ).to.equal(false);
+      done();
+    });
   });
 });
 
