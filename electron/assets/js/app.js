@@ -67,7 +67,7 @@ function runTest(passed, test) {
     case false:
       fail($(test));
       break;
-    case -1:
+    default:
       error($(test));
       break;
   }
