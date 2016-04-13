@@ -1,0 +1,9 @@
+<html>
+	<script>
+		if (top.location != location) {
+			if (document.referrer && document.referrer.indexOf('walmart.com') == -1) {
+				top.location.replace(document.location.href);
+			}
+		}
+	</script>
+</html>
