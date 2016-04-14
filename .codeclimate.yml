@@ -1,2 +1,14 @@
+engines:
+  eslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+ratings:
+  paths:
+  - test/**
+  - "**.js"
 exclude_paths:
-- "arachni/*.rb"
+- arachni/**/*
