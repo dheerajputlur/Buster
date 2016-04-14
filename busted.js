@@ -7,7 +7,7 @@ Busted.prototype.getHeaders = function(URL) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', URL, true);
     xhr.onload = function() {
-      if (xhr.status == 200) {
+      if (xhr.status === 200) {
         resolve([xhr.getResponseHeader('X-Frame-Options'),
           xhr.getResponseHeader('Content-Security-Policy'),
           xhr.getResponseHeader('X-Content-Security-Policy')
@@ -26,7 +26,7 @@ Busted.prototype.getHeaders = function(URL) {
 };
 
 Busted.prototype.standardizeURL = function(URL) {
-  if (URL.indexOf('http') == -1) {
+  if (URL.indexOf('http') === -1) {
     URL = 'http://' + this.removeProtocolFromURL(URL);
   }
   return URL;
