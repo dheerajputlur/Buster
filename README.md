@@ -9,7 +9,7 @@
 
 <img align="right" width="300" src="http://www.dafont.com/forum/attach/orig/5/5/554705.png">
 
-An npm package that detects improper iframe busting code. Also included are an Electron application and a Chrome extension.
+An npm package that detects improper iframe busting code. Also included are an Electron application, Chrome extension, and [Arachni](http://www.arachni-scanner.com/) plugin.
 
 This package is currently under **_heavy_** development and is **not reliable**.
 
