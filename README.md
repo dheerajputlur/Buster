@@ -23,7 +23,7 @@ $ npm install busted
 In a Node.js application (only headers test is functional):
 ```javascript
 var busted = require('busted');
-var URL = "http://www.example.com";
+var URL = 'http://www.example.com';
 busted.headersTest(URL, function(passed) {
   console.log(passed);
 });
@@ -33,7 +33,7 @@ In an Electron application (has DOM access so iframes can be tested):
 ```javascript
 window.BUSTED = require('busted.js');
 
-var URL = "http://www.example.com";
+var URL = 'http://www.example.com';
 var iframe = document.getElementById('frame');
 iframe.src = URL;
 
