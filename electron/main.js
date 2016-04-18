@@ -36,7 +36,7 @@ function createWindow() {
     mainWindow.loadURL('file://' + __dirname + '/index.html');
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 
     mainWindow.webContents.on('new-window', function(event, url) {
         event.preventDefault();
