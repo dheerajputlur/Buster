@@ -9,9 +9,7 @@
 
 <img align="right" width="300" src="http://www.dafont.com/forum/attach/orig/5/5/554705.png">
 
-An npm package that detects improper iframe busting code. Also included are an Electron application, Chrome extension, and [Arachni](http://www.arachni-scanner.com/) plugin.
-
-This package is currently under **_heavy_** development and is **not reliable**.
+An npm package that detects improper iframe busting code. Also included are an [Electron](http://electron.atom.io/) application, Chrome extension, and [Arachni](http://www.arachni-scanner.com/) plugin.
 
 
 ## Installation
@@ -20,7 +18,7 @@ $ npm install busted
 ```
 
 ## Usage
-In a Node.js application (only headers test is functional):
+In a Node.js application (no DOM access to iframes, so only headers test is functional):
 ```javascript
 var busted = require('busted');
 var URL = 'http://www.example.com';
