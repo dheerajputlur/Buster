@@ -119,6 +119,26 @@
   </script>
   <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="assets/js/app.js"></script>
+  <script>
+    function $_GET(param) {
+      var vars = {};
+      window.location.href.replace(location.hash, '').replace(
+        /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+        function(m, key, value) { // callback
+          vars[key] = value !== undefined ? value : '';
+        }
+      );
+
+      if (param) {
+        return vars[param] ? vars[param] : null;
+      }
+      return vars;
+    }
+    if ($_GET('url')) {
+      $('#url').val($_GET('url'));
+      runAttacks();
+    }
+  </script>
 </body>
 
 </html>

@@ -117,7 +117,9 @@ function handleFileSelect(evt) {
     var file = evt.target.files[0];
     var appendToOutput = function(url, passed) {
       if (!passed) {
-        $('.results').append(url + ' failed the headers test.<br>');
+        $('.results').append(url +
+          ' failed the headers test. <a href="attacker.html?url=' +
+          url + '">Test Further</a> <br>');
       }
     };
     $.get(file.path, function(data) {
@@ -129,4 +131,6 @@ function handleFileSelect(evt) {
         }
     });
 }
-document.getElementById('file').addEventListener('change', handleFileSelect, false);
+if (document.getElementById('file')) {
+  document.getElementById('file').addEventListener('change', handleFileSelect, false);
+}
