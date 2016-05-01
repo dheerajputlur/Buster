@@ -121,7 +121,7 @@ function handleFileSelect(evt) {
       }
     };
     $.get(file.path, function(data) {
-        var lines = data.replace(/,/g , '\n').split('\n');
+        var lines = data.replace(/,\s*/g , '\n').split('\n');
         for (var i = 0; i < lines.length; i++) {
             if (lines[i] !== '') {
               window.BUSTED.headersTest(lines[i], appendToOutput);
