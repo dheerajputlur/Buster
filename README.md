@@ -22,8 +22,8 @@ In a Node.js application (no DOM access to iframes, so only headers test is func
 ```javascript
 var busted = require('busted');
 var URL = 'http://www.example.com';
-busted.headersTest(URL, function(passed) {
-  console.log(passed);
+busted.headersTest(URL, function(url, passed) {
+  console.log(url + (passed ? ' passed ' : ' failed ') + 'the headers test.');
 });
 ```
 
@@ -35,12 +35,12 @@ var URL = 'http://www.example.com';
 var iframe = document.getElementById('frame');
 iframe.src = URL;
 
-window.BUSTED.headersTest(URL, function(passed) {
-  console.log(passed);
+window.BUSTED.headersTest(URL, function(url, passed) {
+  console.log(url + (passed ? ' passed ' : ' failed ') + 'the headers test.');
 });
 
 iframe.onload = function() {
   var passed = window.BUSTED.iframeTest(URL, iframe);
-  console.log(passed);
+  console.log(URL + (passed ? ' passed ' : ' failed ') + 'the iframe test.');
 }
 ```
