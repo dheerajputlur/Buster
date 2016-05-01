@@ -44,15 +44,15 @@ $('#attack').click(function() {
 });
 
 function fail(div) {
-    $(div.find('.status')).html('<p class=\'red\'>Fail</p>');
+    $($(div).find('.status')).html('<p class=\'red\'>Fail</p> <small><a href="documentation.html' + div + '">More Info</a></small>');
 }
 
 function pass(div) {
-    $(div.find('.status')).html('<p class=\'green\'>Pass</p>');
+    $($(div).find('.status')).html('<p class=\'green\'>Pass</p>');
 }
 
 function error(div) {
-    $(div.find('.status')).html('<p class=\'yellow\'>Test did not run</p>');
+    $($(div).find('.status')).html('<p class=\'yellow\'>Test did not run</p> <small><a href="documentation.html' + div + '">More Info</a></small>');
 }
 
 function runTest(passed, test) {
@@ -62,13 +62,13 @@ function runTest(passed, test) {
     }
     switch (passed) {
         case true:
-            pass($(test));
+            pass(test);
             break;
         case false:
-            fail($(test));
+            fail(test);
             break;
         default:
-            error($(test));
+            error(test);
             break;
     }
 }
