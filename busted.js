@@ -46,10 +46,10 @@ Busted.prototype.headersTest = function(URL, callback) {
           pass = true;
           break;
       }
-      callback(pass || (Boolean(response[1]) && Boolean(response[2])));
+      callback(URL, pass || (Boolean(response[1]) && Boolean(response[2])));
     },
     function(error) {
-      callback(error);
+      callback(URL, error);
     });
 };
 

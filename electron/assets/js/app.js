@@ -43,6 +43,8 @@ $('#attack').click(function() {
     runAttacks();
 });
 
+var outputFile = null;
+
 function fail(div) {
     $($(div).find('.status')).html('<p class=\'red\'>Fail</p> <small><a href="documentation.html' + div + '">More Info</a></small>');
 }
@@ -55,7 +57,7 @@ function error(div) {
     $($(div).find('.status')).html('<p class=\'yellow\'>Test did not run</p> <small><a href="documentation.html' + div + '">More Info</a></small>');
 }
 
-function runTest(passed, test) {
+function runTest(url, passed, test) {
     test = test || 'test1';
     if (test.indexOf('#') !== 0) {
         test = "#" + test;
@@ -78,35 +80,53 @@ $('#test2 iframe').load(function(e) {
     // if (e.target.contentDocument.URL.indexOf($('#url').val()) < 0) {
     //   $('#test2 iframe').attr('src', 'about:blank');
     // }
-    runTest(window.BUSTED.iframeTest($('#url').val(), this), 'test2');
-});
-
-$('#test2 iframe').error(function(e) {
-    console.log(e);
+    var url = $('#url').val();
+    runTest(url, window.BUSTED.iframeTest(url, this), 'test2');
 });
 
 $('#test3 iframe').load(function() {
     var childFrame = $(this).contents().find('#iframe');
-    var parentFramePassed = window.BUSTED.iframeTest($('#url').val(), this, 'iframe.html?src=');
+    var url = $('#url').val();
+    var parentFramePassed = window.BUSTED.iframeTest(url, this, 'iframe.html?src=');
 
     var childFramePassed = (function() {
-        return window.BUSTED.iframeTest($('#url').val(), childFrame[0]);
+        return window.BUSTED.iframeTest(url, childFrame[0]);
     });
 
     childFrame.load(function() {
-        runTest(childFramePassed() && parentFramePassed, 'test3');
+        runTest(url, childFramePassed() && parentFramePassed, 'test3');
     });
 });
 
 function runAttacks() {
     $('.status').html('');
-    window.BUSTED.headersTest($('#url').val(), runTest);
-    $('#test2 iframe').attr('src', window.BUSTED.standardizeURL($('#url').val()));
-    $('#test3 iframe').attr('src', 'iframe.html?src=' + window.BUSTED.standardizeURL($('#url').val()));
-    runTest(error, 'test4');
+    var url = window.BUSTED.standardizeURL($('#url').val());
+    window.BUSTED.headersTest(url, runTest);
+    $('#test2 iframe').attr('src', url);
+    $('#test3 iframe').attr('src', 'iframe.html?src=' + url);
+    runTest(url, error, 'test4');
 }
 
 window.onbeforeunload = function() {
   runTest(false, 'test4');
+  // Returns a deceptive message to trick the user into staying
   return "Are you sure you want to navigate away from PayPal.com?";
 };
+
+function handleFileSelect(evt) {
+    var file = evt.target.files[0];
+    var appendToOutput = function(url, passed) {
+      if (!passed) {
+        $('.results').append(url + ' failed the headers test.<br>');
+      }
+    };
+    $.get(file.path, function(data) {
+        var lines = data.replace(/,/g , '\n').split('\n');
+        for (var i = 0; i < lines.length; i++) {
+            if (lines[i] !== '') {
+              window.BUSTED.headersTest(lines[i], appendToOutput);
+            }
+        }
+    });
+}
+document.getElementById('file').addEventListener('change', handleFileSelect, false);

@@ -47,7 +47,7 @@
         <div class="row">
           <div class="col-xs-12 col-lg-10 col-lg-offset-1">
             <h1>Scanner</h1>
-            <p>Scan for clickjacking-vulnerable websites.</p>
+            <p>Import a file of URLs to scan for invalid headers.</p>
           </div>
         </div>
       </div>
@@ -60,35 +60,16 @@
             <div class="row">
               <div class="col-xs-12 col-lg-10 col-lg-offset-1">
                 <div class="row">
-                  <div class="col-xs-12 col-sm-8 col-md-10">
-                    <input id="url" class="form-control" type="text" placeholder="URL of website" />
+                  <div class="col-xs-12">
+                    <div class="file-upload button-purple">
+                      <span>Upload</span>
+                      <input type="file" id="file" name="file" class="upload" accept="text/plain" />
+                    </div>
+                    <p>
+                      Plain text files only. Must be comma-separated or new-line-separated values. Protocol is not required. Output is placed below for failing tests only.
+                    </p>
+                    <p class="results"></p>
                   </div>
-                  <div class="col-xs-12 col-sm-4 col-md-2">
-                    <button id="attack" class="button-purple">Demonstrate Attacks</button>
-                  </div>
-                </div>
-
-                <div id="test1">
-                  <h1>Test 1: <small>Headers</small></h1>
-                  <p>This test checks the HTTP headers from X-Frame-Options and Content-Security-Policy.</p>
-                  <div class="status"></div>
-                </div>
-                <div id="test2">
-                  <h1>Test 2: <small>iframe</small></h1>
-                  <p>This test tries to iframe the given website.</p>
-                  <iframe></iframe>
-                  <div class="status"></div>
-                </div>
-                <div id="test3">
-                  <h1>Test 3: <small>Double iframe</small></h1>
-                  <p>This test tries to frame an iframe the given website.</p>
-                  <iframe></iframe>
-                  <div class="status"></div>
-                </div>
-                <div id="test4">
-                  <h1>Test 4: <small>onbeforeunload</small></h1>
-                  <p>This test only fires if an iframe loads and attempts to change top.location</p>
-                  <div class="status"></div>
                 </div>
               </div>
             </div>
