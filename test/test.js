@@ -107,7 +107,7 @@ describe('headersTest', function() {
       var pass;
       before(function(done) {
         var URL = 'http://' + website;
-        var cb = function(passed) {
+        var cb = function(URL, passed) {
           pass = passed;
           done();
         };
