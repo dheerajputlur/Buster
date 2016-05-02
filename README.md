@@ -12,7 +12,7 @@
 An npm package that detects improper iframe busting code and incorrect HTTP headers. "Clickjacking" is a malicious technique of tricking users into clicking on invisible iframes, and thus performing sensitive actions like sharing data or bank transfers without their knowledge. This tool attempts to find and offer suggestions to patch these vulnerabilities in your web applications. Also included are an [Electron](http://electron.atom.io/) application, Chrome extension, and an [Arachni](http://www.arachni-scanner.com/) check.
 
 
-## npm package Installation
+## Install npm package
 ```sh
 $ npm install busted
 ```
