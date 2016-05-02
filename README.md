@@ -9,7 +9,7 @@
 
 <img align="right" width="300" src="http://www.dafont.com/forum/attach/orig/5/5/554705.png">
 
-An npm package that detects improper iframe busting code and incorrect HTTP headers. "Clickjacking" is a malicious technique of tricking users into clicking on invisible iframes, and thus performing sensitive actions like sharing data or bank transfers without their knowledge. This tool attempts to find and offer suggestions to patch these vulnerabilities in your web applications. Also included are an [Electron](http://electron.atom.io/) application, Chrome extension, and an [Arachni](http://www.arachni-scanner.com/) check.
+An npm package that detects improper iframe busting code and incorrect HTTP headers. "Clickjacking" is a malicious technique of tricking users into clicking on invisible iframes, and thus performing sensitive actions like sharing data or bank transfers without their knowledge. This tool attempts to find and offer suggestions to patch these vulnerabilities in your web applications. Also included are an [Electron](http://electron.atom.io/) application, [Chrome extension](https://chrome.google.com/webstore/detail/busted/nhlicbgagiecfehanppnblhoglonondm), and an [Arachni](http://www.arachni-scanner.com/) check.
 
 
 ## Install npm package
@@ -47,11 +47,11 @@ iframe.onload = function() {
 
 ## Using our Electron app
 Our Electron app allows for scanning and testing URLs for the vulnerabilities.
-### Install
+#### Install
 ```sh
 $ git clone https://github.com/nathanchapman/busted.git && cd busted/electron && npm install
 ```
-### Starting the app
+#### Starting the app
 From `busted/electron` run:
 ```sh
 $ npm start
