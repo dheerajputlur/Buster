@@ -57,6 +57,23 @@ From `busted/electron` run:
 $ npm start
 ```
 
+## Arachni Web Scanner Check
+An Arachni check that tests headers and parses JavaScript for improper frame-busting code.
+#### Install Arachni
+Download and install [Arachni](http://www.arachni-scanner.com/download/).
+#### Install Busted
+```sh
+$ git clone https://github.com/nathanchapman/busted.git
+```
+Move the `arachni/clickjacking.rb` file to:
+`[ARACHNI_DIRECTORY]/system/gems/gems/arachni-1.4/components/checks/passive`
+from within `[ARACHNI_DIRECTORY]` run the following:
+```sh
+$ bin/arachni --checks=clickjacking --scope-page-limit 1 --browser-cluster-pool-size 1 SOME_URL_OR_FILE
+```
+for more information, see the [Arachni CLI guide](https://github.com/Arachni/arachni/wiki/Command-line-user-interface).
+
+
 ## Clickjacking Prevention
 There are other attacks that are site-specific or are possible if the attacker controls certian domain names. These attacks cannot be tested here, but we will attempt to prevent them with this two-fold solution.
 
