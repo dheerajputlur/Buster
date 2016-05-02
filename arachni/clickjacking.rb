@@ -51,7 +51,7 @@ class Arachni::Checks::Clickjacking < Arachni::Check::Base
                     return
                 end
             }
-            
+
             # Check to see if display is none at beginning. Otherwise, many clickjacking attacks will work.
             if !(body =~ /<style.*?>(.*?[\s*\n*;])?html[\s*\n*]?{(.*?[\s*\n*;])?display\s*:\s*none\s*[;\s*\n*]*}.*<\/style>/m)
                 log( vector: Element::Server.new( response.url ), response: response, proof: body )
@@ -66,7 +66,7 @@ class Arachni::Checks::Clickjacking < Arachni::Check::Base
 Checks to see if a page is vunerable to clickjacking by checking the page for various frame-busting techniques.
 },
             author:      'Kyle Schmid (kyleschmid@me.com)',
-            version:     '0.1',
+            version:     '1.0.0',
 
             issue:       {
                 name:                   %q{Clickjacking issue},

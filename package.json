@@ -1,6 +1,6 @@
 {
   "name": "busted",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "A node module that detects improper iframe busting code",
   "main": "busted.js",
   "scripts": {
