@@ -27,7 +27,7 @@ busted.headersTest(URL, function(url, passed) {
 });
 ```
 
-In an Electron application (has DOM access so iframes can be tested):
+In any Electron application (has DOM access so iframes can be tested):
 ```javascript
 window.BUSTED = require('busted.js');
 
@@ -43,6 +43,18 @@ iframe.onload = function() {
   var passed = window.BUSTED.iframeTest(URL, iframe);
   console.log(URL + (passed ? ' passed ' : ' failed ') + 'the iframe test.');
 }
+```
+
+## Using our Electron app
+Our Electron app allows for scanning and testing URLs for the vulnerabilities.
+### Install
+```sh
+$ git clone https://github.com/nathanchapman/busted.git && cd busted/electron && npm install
+```
+### Starting the app
+From `busted/electron` run:
+```sh
+$ npm start
 ```
 
 ## Clickjacking Prevention
