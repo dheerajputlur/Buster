@@ -9,10 +9,10 @@
 
 <img align="right" width="300" src="http://www.dafont.com/forum/attach/orig/5/5/554705.png">
 
-An npm package that detects improper iframe busting code. Also included are an [Electron](http://electron.atom.io/) application, Chrome extension, and [Arachni](http://www.arachni-scanner.com/) plugin.
+An npm package that detects improper iframe busting code and incorrect HTTP headers. "Clickjacking" is a malicious technique of tricking users into clicking on invisible iframes, and thus performing sensitive actions like sharing data or bank transfers without their knowledge. This tool attempts to find and offer suggestions to patch these vulnerabilities in your web applications. Also included are an [Electron](http://electron.atom.io/) application, Chrome extension, and an [Arachni](http://www.arachni-scanner.com/) check.
 
 
-## Installation
+## npm package Installation
 ```sh
 $ npm install busted
 ```
@@ -43,4 +43,24 @@ iframe.onload = function() {
   var passed = window.BUSTED.iframeTest(URL, iframe);
   console.log(URL + (passed ? ' passed ' : ' failed ') + 'the iframe test.');
 }
+```
+
+## Clickjacking Prevention
+There are other attacks that are site-specific or are possible if the attacker controls certian domain names. These attacks cannot be tested here, but we will attempt to prevent them with this two-fold solution.
+
+__Headers:__ Set X-Frame-Options header to DENY or SAMEORIGIN
+
+__Frame Busting Code:__ Use the following frame busting code as a solution for older browsers that do not support X-Frame-Options or Content-Security-Policy headers.
+```html
+<!-- Source: http://w2spconf.com/2010/papers/p27.pdf -->
+<style>
+html { display: none; }
+</style>
+<script>
+if (self == top) {
+  document.documentElement.style.display = 'block';
+} else {
+  top.location = self.location;
+}
+</script>
 ```
