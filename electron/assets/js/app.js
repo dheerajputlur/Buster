@@ -46,11 +46,11 @@ $('#attack').click(function() {
 var outputFile = null;
 
 function fail(div) {
-    $($(div).find('.status')).html('<p class=\'red\'>Fail</p> <small><a href="documentation.html' + div + '">More Info</a></small>');
+    $($(div).find('.status')).html('<p class=\'red\'>BUSTED</p> <small><a href="documentation.html' + div + '">More Info</a></small>');
 }
 
 function pass(div) {
-    $($(div).find('.status')).html('<p class=\'green\'>Pass</p>');
+    $($(div).find('.status')).html('<p class=\'green\'>Passed</p>');
 }
 
 function error(div) {
