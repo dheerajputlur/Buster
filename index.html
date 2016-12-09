@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Busted by nathanchapman</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Busted</h1>
+        <p>An npm package that detects improper iframe busting code</p>
+
+        <p class="view"><a href="https://github.com/nathanchapman/busted">View the Project on GitHub <small>nathanchapman/busted</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/nathanchapman/busted/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/nathanchapman/busted/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/nathanchapman/busted">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="busted" class="anchor" href="#busted" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Busted</h1>
+
+<p><a href="https://www.npmjs.org/package/busted"><img src="https://img.shields.io/npm/v/busted.svg" alt="npm version"></a>
+<a href="https://www.npmjs.org/package/busted"><img src="https://img.shields.io/npm/dt/busted.svg" alt="npm downloads"></a>
+<a href="https://travis-ci.org/nathanchapman/busted"><img src="https://travis-ci.org/nathanchapman/busted.svg" alt="Travis CI"></a>
+<a href="https://coveralls.io/github/nathanchapman/busted?branch=master"><img src="https://coveralls.io/repos/github/nathanchapman/busted/badge.svg?branch=master" alt="Coverage Status"></a>
+<a href="https://codeclimate.com/github/nathanchapman/busted"><img src="https://codeclimate.com/github/nathanchapman/busted/badges/gpa.svg" alt="Code Climate Grade"></a>
+<a href="https://www.bithound.io/github/nathanchapman/busted"><img src="https://www.bithound.io/github/nathanchapman/busted/badges/score.svg" alt="bitHound Overall Score"></a>
+<a href="https://github.com/nathanchapman/busted/blob/master/LICENSE"><img src="https://img.shields.io/github/license/nathanchapman/busted.svg" alt="GitHub license"></a></p>
+
+<p><img align="right" width="300" src="http://www.dafont.com/forum/attach/orig/5/5/554705.png"></p>
+
+<p>An npm package that detects improper iframe busting code and incorrect HTTP headers. "Clickjacking" is a malicious technique of tricking users into clicking on invisible iframes, and thus performing sensitive actions like sharing data or bank transfers without their knowledge. This tool attempts to find and offer suggestions to patch these vulnerabilities in your web applications. Also included are an <a href="http://electron.atom.io/">Electron</a> application, <a href="https://chrome.google.com/webstore/detail/busted/nhlicbgagiecfehanppnblhoglonondm">Chrome extension</a>, and an <a href="http://www.arachni-scanner.com/">Arachni</a> check.</p>
+
+<h2>
+<a id="install-npm-package" class="anchor" href="#install-npm-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install npm package</h2>
+
+<div class="highlight highlight-source-shell"><pre>$ npm install busted</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>In a Node.js application (no DOM access to iframes, so only headers test is functional):</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> busted <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>busted<span class="pl-pds">'</span></span>);
+<span class="pl-k">var</span> <span class="pl-c1">URL</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>http://www.example.com<span class="pl-pds">'</span></span>;
+<span class="pl-smi">busted</span>.<span class="pl-en">headersTest</span>(<span class="pl-c1">URL</span>, <span class="pl-k">function</span>(<span class="pl-smi">url</span>, <span class="pl-smi">passed</span>) {
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(url <span class="pl-k">+</span> (passed <span class="pl-k">?</span> <span class="pl-s"><span class="pl-pds">'</span> passed <span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span> failed <span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>the headers test.<span class="pl-pds">'</span></span>);
+});</pre></div>
+
+<p>In any Electron application (has DOM access so iframes can be tested):</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c1">window</span>.<span class="pl-c1">BUSTED</span> <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>busted.js<span class="pl-pds">'</span></span>);
+
+<span class="pl-k">var</span> <span class="pl-c1">URL</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>http://www.example.com<span class="pl-pds">'</span></span>;
+<span class="pl-k">var</span> iframe <span class="pl-k">=</span> <span class="pl-c1">document</span>.<span class="pl-c1">getElementById</span>(<span class="pl-s"><span class="pl-pds">'</span>frame<span class="pl-pds">'</span></span>);
+<span class="pl-smi">iframe</span>.<span class="pl-smi">src</span> <span class="pl-k">=</span> <span class="pl-c1">URL</span>;
+
+<span class="pl-c1">window</span>.<span class="pl-c1">BUSTED</span>.<span class="pl-en">headersTest</span>(<span class="pl-c1">URL</span>, <span class="pl-k">function</span>(<span class="pl-smi">url</span>, <span class="pl-smi">passed</span>) {
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(url <span class="pl-k">+</span> (passed <span class="pl-k">?</span> <span class="pl-s"><span class="pl-pds">'</span> passed <span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span> failed <span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>the headers test.<span class="pl-pds">'</span></span>);
+});
+
+<span class="pl-smi">iframe</span>.<span class="pl-en">onload</span> <span class="pl-k">=</span> <span class="pl-k">function</span>() {
+  <span class="pl-k">var</span> passed <span class="pl-k">=</span> <span class="pl-c1">window</span>.<span class="pl-c1">BUSTED</span>.<span class="pl-en">iframeTest</span>(<span class="pl-c1">URL</span>, iframe);
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-c1">URL</span> <span class="pl-k">+</span> (passed <span class="pl-k">?</span> <span class="pl-s"><span class="pl-pds">'</span> passed <span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span> failed <span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>the iframe test.<span class="pl-pds">'</span></span>);
+}</pre></div>
+
+<h2>
+<a id="using-our-electron-app" class="anchor" href="#using-our-electron-app" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using our Electron app</h2>
+
+<p>Our Electron app allows for scanning and testing URLs for the vulnerabilities.</p>
+
+<h4>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ git clone https://github.com/nathanchapman/busted.git <span class="pl-k">&amp;&amp;</span> <span class="pl-c1">cd</span> busted/electron <span class="pl-k">&amp;&amp;</span> npm install</pre></div>
+
+<h4>
+<a id="starting-the-app" class="anchor" href="#starting-the-app" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Starting the app</h4>
+
+<p>From <code>busted/electron</code> run:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ npm start</pre></div>
+
+<h2>
+<a id="arachni-web-scanner-check" class="anchor" href="#arachni-web-scanner-check" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Arachni Web Scanner Check</h2>
+
+<p>An Arachni check that tests headers and parses JavaScript for improper frame-busting code.</p>
+
+<h4>
+<a id="install-arachni" class="anchor" href="#install-arachni" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install Arachni</h4>
+
+<p>Download and install <a href="http://www.arachni-scanner.com/download/">Arachni</a>.</p>
+
+<h4>
+<a id="install-busted" class="anchor" href="#install-busted" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install Busted</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ git clone https://github.com/nathanchapman/busted.git</pre></div>
+
+<p>Move the <code>arachni/clickjacking.rb</code> file to:
+<code>[ARACHNI_DIRECTORY]/system/gems/gems/arachni-1.4/components/checks/passive</code>
+from within <code>[ARACHNI_DIRECTORY]</code> run the following:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ bin/arachni --checks=clickjacking --scope-page-limit 1 --browser-cluster-pool-size 1 SOME_URL_OR_FILE</pre></div>
+
+<p>for more information, see the <a href="https://github.com/Arachni/arachni/wiki/Command-line-user-interface">Arachni CLI guide</a>.</p>
+
+<h2>
+<a id="clickjacking-prevention" class="anchor" href="#clickjacking-prevention" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Clickjacking Prevention</h2>
+
+<p>There are other attacks that are site-specific or are possible if the attacker controls certian domain names. These attacks cannot be tested here, but we will attempt to prevent them with this two-fold solution.</p>
+
+<p><strong>Headers:</strong> Set X-Frame-Options header to DENY or SAMEORIGIN</p>
+
+<p><strong>Frame Busting Code:</strong> Use the following frame busting code as a solution for older browsers that do not support X-Frame-Options or Content-Security-Policy headers.</p>
+
+<div class="highlight highlight-text-html-basic"><pre><span class="pl-c">&lt;!-- Source: http://w2spconf.com/2010/papers/p27.pdf --&gt;</span>
+<span class="pl-s1">&lt;<span class="pl-ent">style</span>&gt;</span>
+<span class="pl-s1"><span class="pl-ent">html</span> { <span class="pl-c1"><span class="pl-c1">display</span></span>: <span class="pl-c1">none</span>; }</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">style</span>&gt;</span>
+<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"><span class="pl-k">if</span> (self <span class="pl-k">==</span> top) {</span>
+<span class="pl-s1">  <span class="pl-c1">document</span>.<span class="pl-c1">documentElement</span>.<span class="pl-c1">style</span>.<span class="pl-c1">display</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>block<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1">} <span class="pl-k">else</span> {</span>
+<span class="pl-s1">  <span class="pl-smi">top</span>.<span class="pl-c1">location</span> <span class="pl-k">=</span> <span class="pl-smi">self</span>.<span class="pl-c1">location</span>;</span>
+<span class="pl-s1">}</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/nathanchapman">nathanchapman</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
