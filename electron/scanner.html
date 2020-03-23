@@ -8,7 +8,7 @@
   <meta name="description" content="Busted detects websites vulnerable to clickjacking exploits, demonstrates these attacks, and offers advice for patching.">
   <meta name="keywords" content="Busted">
   <meta name="author" content="Nathan Chapman">
-  <title>Busted</title>
+  <title>Busted Scanner</title>
   <link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
   <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -46,8 +46,8 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-lg-10 col-lg-offset-1">
-            <h1>Busted</h1>
-            <p class="lead">Busted detects websites vulnerable to clickjacking exploits, demonstrates these attacks, and offers advice for patching.</p>
+            <h1>Scanner</h1>
+            <p>Import a file of URLs to scan for invalid headers.</p>
           </div>
         </div>
       </div>
@@ -56,10 +56,23 @@
     <div id="content">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-lg-10 col-lg-offset-1">
-            <h1 id="intro">Welcome</h1>
-
-            <p>Hey there! Thanks for checking out our desktop application. Busted detects websites vulnerable to clickjacking exploits, demonstrates these attacks, and offers advice for patching. Busted is available a <a href="https://github.com/nathanchapman/busted" target="_blank">desktop application</a>, <a href="https://www.npmjs.com/package/busted" target="_blank">node module</a>, and a <a href="https://chrome.google.com/webstore/detail/busted/nhlicbgagiecfehanppnblhoglonondm" target="_blank">Chrome extension</a>.</p>
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="file-upload button-purple">
+                      <span>Upload</span>
+                      <input type="file" id="file" name="file" class="upload" accept="text/plain" />
+                    </div>
+                    <p>
+                      Plain text files only. Must be comma-separated or new-line-separated values. Protocol is not required. Output is placed below for failing tests only.
+                    </p>
+                    <p class="results"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -67,7 +80,12 @@
   </main>
   <a class="back-to-top" href="#">Back to top</a>
 
-  <script>window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');</script>
+  <script>
+    window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');
+  </script>
+  <script>
+    window.BUSTED = require('../busted.js');
+  </script>
   <script src="node_modules/slideout/dist/slideout.min.js"></script>
   <script>
     var slideout = new Slideout({
@@ -77,7 +95,9 @@
       'tolerance': 70
     });
   </script>
-  <script>window.Tether = {}</script>
+  <script>
+    window.Tether = {}
+  </script>
   <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="assets/js/app.js"></script>
 </body>

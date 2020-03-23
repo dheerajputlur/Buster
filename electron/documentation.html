@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Busted detects websites vulnerable to clickjacking exploits, demonstrates these attacks, and offers advice for patching.">
+  <meta name="keywords" content="Busted">
+  <meta name="author" content="Nathan Chapman">
+  <title>Busted Documentation</title>
+  <link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+  <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="node_modules/slideout/index.css" rel="stylesheet">
+  <link href="assets/css/app.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav id="menu" class="no-select">
+    <ul class="list-group">
+      <li class="headline">Busted</li>
+      <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        <a href="attacker.html">Attacker</a>
+      </li>
+      <li>
+        <a href="scanner.html">Scanner</a>
+      </li>
+      <li class="headline">Help</li>
+      <li>
+        <a href="documentation.html">Documentation</a>
+      </li>
+    </ul>
+  </nav>
+
+  <main id="panel">
+    <button id="menu-button">
+      <i class="fa fa-bars"></i>
+      <span>Menu</span>
+    </button>
+
+    <div id="top-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+            <h1>Documentation</h1>
+            <p>Busted help &amp; documentation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+            <h1 id="test1">Test 1: <small>Headers</small></h1>
+            <p>Setting X-Frame-Options to DENY or SAMEORIGIN will make this test <b class="green">pass</b> because less than 0.2% of the market use browsers that do not support these options. Using ALLOW-FROM causes this test to <b class="red">fail</b>, because ALLOW-FROM is not supported in Chrome, which makes up about 70% of the browser market share.</p>
+            <p>This test will also <b class="green">pass</b> if both Content-Security-Policy and X-Content-Security-Policy are set.</p>
+            <h4><a href="http://www.w3schools.com/browsers/browsers_stats.asp" target="_blank">Browser Usage Statistics</a></h4>
+            <small>
+              Warning for Content-Security-Policy users: more browsers support <a href="https://www.owasp.org/index.php/Clickjacking_Defense_Cheat_Sheet#Browser_Support" target="_blank">X-Frame-Options</a>.<br />Verify that the <a href="http://caniuse.com/#feat=contentsecuritypolicy" target="_blank">Content-Security-Policy Support</a> covers your user base.
+            </small>
+
+            <h1 id="test2">Test 2: <small>iframe</small></h1>
+            <p>This test attempts to frame the given URL. It will automatically <b class="green">pass</b> in browsers that support X-Frame-Options or Content-Security-Policy (including this application) if <a href="#test1">Test&nbsp;1</a> passes. This test will <b class="red">fail</b> if the given URL is successfully framed.</p>
+
+            <h1 id="test3">Test 3: <small>Double iframe</small></h1>
+            <p>This test attempts to frame the given URL from inside a child iframe.html file. It will automatically <b class="green">pass</b> in browsers that support X-Frame-Options or Content-Security-Policy (including this application) if <a href="#test1">Test&nbsp;1</a> passes. This test will <b class="red">fail</b> if the given URL is successfully framed in either iframe.</p>
+
+            <h1 id="test4">Test 4: <small>onbeforeunload</small></h1>
+            <p>This test only fires if an iframe loads in <a href="#test2">Test&nbsp;2</a> or <a href="#test3">Test&nbsp;3</a> and attempts to change top.location. The user is prompted with a deceptive message to stay on the page and the test will <b class="red">fail</b> if they stay. This technique is described in the PDF source at the bottom of this page.</p>
+
+            <h1 id="solution">The Best Solution</h1>
+            <p>There are other attacks that are site-specific or are possible if the attacker controls certian domain names. These attacks cannot be tested here, but we will attempt to prevent them with this two-fold solution.</p>
+            <p><b>Headers:</b> Set X-Frame-Options header to DENY or SAMEORIGIN</p>
+            <p><b>Frame Busting Code:</b> Use the following frame busting code as a solution for older browsers that do not support X-Frame-Options or Content-Security-Policy headers.</p>
+<pre><code>
+&lt;style>
+html { display: none; }
+&lt;/style>
+&lt;script>
+if (self == top) {
+document.documentElement.style.display = 'block';
+} else {
+top.location = self.location;
+}
+&lt;/script>
+</code></pre>
+          <p>Source: <a href="http://w2spconf.com/2010/papers/p27.pdf" download="framebusting.pdf">Busting Frame Busting: a Study of Clickjacking Vulnerabilities on Popular Sites.</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <a class="back-to-top" href="#">Back to top</a>
+
+  <script>window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');</script>
+  <script src="node_modules/slideout/dist/slideout.min.js"></script>
+  <script>
+    var slideout = new Slideout({
+      'panel': document.getElementById('panel'),
+      'menu': document.getElementById('menu'),
+      'padding': 256,
+      'tolerance': 70
+    });
+  </script>
+  <script>window.Tether = {}</script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+
+</html>

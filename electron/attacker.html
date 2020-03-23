@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Busted detects websites vulnerable to clickjacking exploits, demonstrates these attacks, and offers advice for patching.">
+  <meta name="keywords" content="Busted">
+  <meta name="author" content="Nathan Chapman">
+  <title>Busted Attacker</title>
+  <link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,700" rel="stylesheet">
+  <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="node_modules/slideout/index.css" rel="stylesheet">
+  <link href="assets/css/app.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav id="menu" class="no-select">
+    <ul class="list-group">
+      <li class="headline">Busted</li>
+      <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        <a href="attacker.html">Attacker</a>
+      </li>
+      <li>
+        <a href="scanner.html">Scanner</a>
+      </li>
+      <li class="headline">Help</li>
+      <li>
+        <a href="documentation.html">Documentation</a>
+      </li>
+    </ul>
+  </nav>
+
+  <main id="panel">
+    <button id="menu-button">
+      <i class="fa fa-bars"></i>
+      <span>Menu</span>
+    </button>
+
+    <div id="top-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+            <h1>Attacker</h1>
+            <p>Run &amp; demonstrate attacks on any website.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-8 col-md-10">
+                    <input id="url" class="form-control" type="text" placeholder="URL of website" />
+                  </div>
+                  <div class="col-xs-12 col-sm-4 col-md-2">
+                    <button id="attack" class="button-purple">Demonstrate Attacks</button>
+                  </div>
+                </div>
+
+                <div id="test1">
+                  <h1>Test 1: <small>Headers</small></h1>
+                  <p>This test checks the HTTP headers from X-Frame-Options and Content-Security-Policy.</p>
+                  <div class="status"></div>
+                </div>
+                <div id="test2">
+                  <h1>Test 2: <small>iframe</small></h1>
+                  <p>This test tries to iframe the given website.</p>
+                  <iframe></iframe>
+                  <div class="status"></div>
+                </div>
+                <div id="test3">
+                  <h1>Test 3: <small>Double iframe</small></h1>
+                  <p>This test tries to frame an iframe the given website.</p>
+                  <iframe></iframe>
+                  <div class="status"></div>
+                </div>
+                <div id="test4">
+                  <h1>Test 4: <small>onbeforeunload</small></h1>
+                  <p>This test only fires if an iframe loads and attempts to change top.location</p>
+                  <div class="status"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <a class="back-to-top" href="#">Back to top</a>
+
+  <script>
+    window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');
+  </script>
+  <script>
+    window.BUSTED = require('../busted.js');
+  </script>
+  <script src="node_modules/slideout/dist/slideout.min.js"></script>
+  <script>
+    var slideout = new Slideout({
+      'panel': document.getElementById('panel'),
+      'menu': document.getElementById('menu'),
+      'padding': 256,
+      'tolerance': 70
+    });
+  </script>
+  <script>
+    window.Tether = {}
+  </script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    function $_GET(param) {
+      var vars = {};
+      window.location.href.replace(location.hash, '').replace(
+        /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+        function(m, key, value) { // callback
+          vars[key] = value !== undefined ? value : '';
+        }
+      );
+
+      if (param) {
+        return vars[param] ? vars[param] : null;
+      }
+      return vars;
+    }
+    if ($_GET('url')) {
+      $('#url').val($_GET('url'));
+      runAttacks();
+    }
+  </script>
+</body>
+
+</html>
